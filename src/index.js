@@ -1,26 +1,9 @@
-const myArr = [
-  [1, 2],
-  [3, 4],
-  [5, 6],
-];
 
-const myArr2 = [1,2,3,4];
-
-const reduceRightArr = myArr.reduceRight(function (a, b) {
-  return a.concat(b);
-}, [1]);
-console.log(`Очікуємий результат (конкатинація): ${reduceRightArr}`);
-
-const reduceRightArr2 = myArr2.reduceRight(function (a, b) {
-  return a+b;
-}, 10);
-console.log(`Очікуємий результат (сумма): ${reduceRightArr2}`);
-
-function myReduceRight(arr, callback, initVal) {
+function myReduceRight(arr, callback, initialVal) {
   let result;
   let size = arr.length;
-  if (initVal) {
-    result = initVal;
+  if (initialVal) {
+    result = initialVal;
     for (let i = size - 1; i >= 0; i--) {
       result = callback(result, arr[i], i, arr);
     }
@@ -32,9 +15,20 @@ function myReduceRight(arr, callback, initVal) {
   }
   return result;
 }
-const myReduceRightArr = myReduceRight(myArr, (a, b) => a.concat(b),[1]);
-console.log(`Отриманий результат (конкатинація): ${myReduceRightArr}`);
-console.log(myReduceRightArr);
 
-const myReduceRightArr2 = myReduceRight(myArr2, (a, b) => a+b, 10);
-console.log(`Отриманий результат (сумма): ${myReduceRightArr2}`);
+function reduceRightCallback(a, b) {
+  return a.concat(b);
+}
+
+const myArr = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+
+let initVal = [10, 20];
+
+const reduceRightArr = myArr.reduceRight(reduceRightCallback, initVal);
+console.log(`Очікуємий результат: ${reduceRightArr}`);
+const myReduceRightArr = myReduceRight(myArr, reduceRightCallback, initVal);
+console.log(`Отриманий результат: ${myReduceRightArr}`);
