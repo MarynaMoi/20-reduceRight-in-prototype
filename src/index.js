@@ -35,21 +35,14 @@ function MyArrayProto() {
 MyArray.prototype = new MyArrayProto();
 
 function reduceRightCallback(a, b) {
-  return a.concat(b);
+  return a+b;
 }
 
-const arr = [
-  [1, 2],
-  [3, 4],
-  [5, 6],
-];
+const arr = [1,2,3,4,5,6];
 
-arr.push(222222);
+const myArr = new MyArray(1,2,3,4,5,6);
 
-const myArr = new MyArray([1, 2], [3, 4], [5, 6]);
-myArr.push(222222);
-
-let initVal = [10, 20];
+let initVal = (10);
 
 const reduceRightArr = arr.reduceRight(reduceRightCallback, initVal);
 console.log(`Очікуємий результат: ${reduceRightArr}`);
